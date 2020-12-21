@@ -17,7 +17,6 @@ function Contents(){
     <div Style = "width: 80%; padding-left: 10%">
         <Head />
         <Body />
-        <h>hallojsan</h>
     </div>
     );
 }
@@ -25,8 +24,10 @@ function Contents(){
 function Head (){
     return(
         <div>
-            <h1>Hallojsan!</h1>
-            <h2>Klockan är <Clock /> och ute är det <Curr /></h2>
+            <h1 Style = "float: right; font-size:7em; padding-left: 0.1em; padding-right: 0.1em;" Class = "shadow-6"> <Clock /> </h1>
+            <h1> </h1>
+            <h2>Nuvarande temperatur: <CurrT /></h2> 
+            <h2>Nuvarande Luftfuktighet: <CurrH /></h2> 
         </div> 
     );
 }
@@ -34,20 +35,34 @@ function Head (){
 function Body (){
     return(
         <div Style = "padding-top:4em;">
-            Bodyyyy
-            <TempGraph />
-            <HumidGraph />
+            
+            <TempGraph /> 
+        
+            <HumidGraph /> 
         </div>
     );
 }
 
-function Curr(){
+function CurrT(){
     let temp = data.weather_logs[data.weather_logs.length - 1].Temp
+
+    return (
+        <div>    
+            <h1>
+            {temp + "\u00B0 C "}
+            </h1>
+        </div>
+    );
+}
+
+function CurrH(){
     let humi = data.weather_logs[data.weather_logs.length - 1].Humi
 
     return (
-        <div Style ="display: inline-block;">
-          {temp+"*C " + humi+"%"}
+        <div>    
+            <h1>
+            {humi+"%"}
+            </h1>
         </div>
     );
 }
@@ -69,7 +84,7 @@ function HumidGraph (){
         }]}
     
     return (
-    <div>
+    <div Style = "padding-top:6em">
         <CanvasJSChart options = {options} 
             /* onRef={ref => this.chart = ref} */
         />
@@ -153,7 +168,7 @@ class Clock extends React.Component {
     render() {
       return (
         <div Style ="display: inline-block;">
-          {this.state.date.toLocaleTimeString()}
+          {this.state.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' , hour12: false})}
         </div>
       );
     }
