@@ -1,6 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import React from "react";
+//import graphView from "./Graph"
+
+import CanvasJSReact from './canvasjs.react';
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function App() {
     return (
@@ -31,10 +36,47 @@ function Body (){
     return(
         <div Style = "padding-top:4em;">
             Bodyyyy
+            <Graph />
         </div>
     );
 }
 
+function Graph (){
+	
+		let options = {
+			theme: "light2", // "light1", "dark1", "dark2"
+			animationEnabled: true,
+			zoomEnabled: true,
+			title: {
+				text: "Try Zooming and Panning"
+			},
+			data: [{
+				type: "spline",
+				dataPoints: generateDataPoints(192)
+			}]}
+		
+		
+		return (
+		<div>
+			<CanvasJSChart options = {options} 
+				/* onRef={ref => this.chart = ref} */
+			/>
+			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+		</div>
+		);
+      
+}
+
+function generateDataPoints(noOfDps) {
+    var xVal = 1, yVal = 0;
+    var dps = [];
+    for(var i = 0; i < noOfDps; i++) {
+        yVal = yVal +  Math.round(1 + Math.random() *(-1-1));
+        dps.push({x: xVal,y: yVal});	
+        xVal++;
+    }
+    return dps;
+}
 
 class Clock extends React.Component {
     constructor (props){
@@ -65,6 +107,8 @@ class Clock extends React.Component {
         </div>
       );
     }
-  }
+}
+
+
 
 export default App;
