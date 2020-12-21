@@ -18,16 +18,18 @@ try:
 except:
     pass
 
+# loops and scans the DHT sensor every 30 seconds
 while True:
     humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
 
-     if humidity is not None and temperature is not None:
+    # when the temperature and humidity both has been read succesfully, append that data to the data.json file
+    # src : https://www.geeksforgeeks.org/append-to-json-file-using-python/
+    if humidity is not None and temperature is not None:
         with open('data.json') as json_file: 
             data = json.load(json_file) 
             temp = data['weather_logs'] 
             # python object to be appended 
-            y = {"Date" : time.strftime('%y/%m/%d'),
-                 "Time" : time.strftime('%H:%M'),
+            y = {"Date" : time.strftime('%d %b %Y %H:%M:%S'),
                  "Temp" : temperature,
                  "Humi" : humidity} 
         
@@ -37,4 +39,4 @@ while True:
     else:
         print("Failed to retrieve data from humidity sensor")
 
-    time.sleep(30)
+    time.sleep(60) #seconds

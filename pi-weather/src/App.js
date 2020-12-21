@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import React from "react";
-//import graphView from "./Graph"
+import data from "./Backend/Logs/data.json"
 
 import CanvasJSReact from './canvasjs.react';
-var CanvasJS = CanvasJSReact.CanvasJS;
+// var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function App() {
@@ -27,8 +26,8 @@ function Head (){
     return(
         <div>
             <h1>Hallojsan!</h1>
-            <h2>Klockan är <Clock />.</h2>
-        </div>
+            <h2>Klockan är <Clock /> och ute är det <Curr /></h2>
+        </div> 
     );
 }
 
@@ -36,12 +35,61 @@ function Body (){
     return(
         <div Style = "padding-top:4em;">
             Bodyyyy
-            <Graph />
+            <TempGraph />
+            <HumidGraph />
         </div>
     );
 }
 
-function Graph (){
+function Curr(){
+    let temp = data.weather_logs[data.weather_logs.length - 1].Temp
+    let humi = data.weather_logs[data.weather_logs.length - 1].Humi
+
+    return (
+        <div Style ="display: inline-block;">
+          {temp+"*C " + humi+"%"}
+        </div>
+    );
+}
+
+function HumidGraph (){
+	
+    let options = {
+        theme: "light2", // "light1", "dark1", "dark2"
+        animationEnabled: true,
+        zoomEnabled: true,
+        title: {
+            text: "Luftfuktighet det senaste dygnet"
+        },
+        data: [{
+            type: "line",
+            xValueFormatString: "HH MM",
+            yValueFormatString: "##.##%",
+            dataPoints: humidData()
+        }]}
+    
+    return (
+    <div>
+        <CanvasJSChart options = {options} 
+            /* onRef={ref => this.chart = ref} */
+        />
+        {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+    </div>
+    );
+  
+}
+
+function humidData(){
+    var hs = [];
+    for (const elem of data.weather_logs){
+        hs.push({x: new Date(elem.Date), y: parseFloat(elem.Humi)})
+    } 
+    console.log(hs); 
+    return hs;
+}
+
+
+function TempGraph (){
 	
 		let options = {
 			theme: "light2", // "light1", "dark1", "dark2"
@@ -52,9 +100,10 @@ function Graph (){
 			},
 			data: [{
 				type: "line",
-				dataPoints: generateDataPoints(192)
+				xValueFormatString: "HH MM",
+				yValueFormatString: "##.##C",
+				dataPoints: tempData()
 			}]}
-		
 		
 		return (
 		<div>
@@ -67,27 +116,17 @@ function Graph (){
       
 }
 
-function showFile(e) {
-    const reader = new FileReader()
-    reader.onload = async (e) => { 
-        const text = (e.target.result)
-        console.log(text)
-        alert(text)
-    };
-    reader.readAsText(e.target)
+/* add function of getting the list of temp and list of humidity from a Json object*/
+function tempData(){
+    var ts = [];
+    for (const elem of data.weather_logs){
+        ts.push({x: new Date(elem.Date), y: parseFloat(elem.Temp)})
+    } 
+    console.log(ts); 
+    return ts;
 }
 
-function generateDataPoints(noOfDps) {
-    showFile("./Backend/Logs/log.txt")
-    var xVal = 1, yVal = 0;
-    var dps = [];
-    for(var i = 0; i < noOfDps; i++) {
-        yVal = yVal +  Math.round(1 + Math.random() *(-1-1));
-        dps.push({x: xVal,y: yVal});	
-        xVal++;
-    }
-    return dps;
-}
+
 
 class Clock extends React.Component {
     constructor (props){
