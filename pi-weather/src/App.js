@@ -48,10 +48,10 @@ function Graph (){
 			animationEnabled: true,
 			zoomEnabled: true,
 			title: {
-				text: "Try Zooming and Panning"
+				text: "Temperatur det senaste dygnet"
 			},
 			data: [{
-				type: "spline",
+				type: "line",
 				dataPoints: generateDataPoints(192)
 			}]}
 		
@@ -67,7 +67,18 @@ function Graph (){
       
 }
 
+function showFile(e) {
+    const reader = new FileReader()
+    reader.onload = async (e) => { 
+        const text = (e.target.result)
+        console.log(text)
+        alert(text)
+    };
+    reader.readAsText(e.target)
+}
+
 function generateDataPoints(noOfDps) {
+    showFile("./Backend/Logs/log.txt")
     var xVal = 1, yVal = 0;
     var dps = [];
     for(var i = 0; i < noOfDps; i++) {
@@ -88,7 +99,7 @@ class Clock extends React.Component {
         if(!this.timerId){     
             this.timerId = setInterval(()=>{
               this.tick();
-            }, 1000);
+            }, 30000);
           }
       }
 
