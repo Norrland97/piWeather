@@ -27,7 +27,7 @@ function Head (){
             <h1 Style = "float: right; font-size:7em; padding-left: 0.1em; padding-right: 0.1em;" Class = "shadow-6"> <Clock /> </h1>
             <h1> </h1>
             <h2>Nuvarande temperatur: <CurrT /></h2> 
-            <h2>Nuvarande Luftfuktighet: <CurrH /></h2> 
+            <h2 Style="padding-top:1em;">Nuvarande Luftfuktighet: <CurrH /></h2> 
         </div> 
     );
 }
@@ -103,6 +103,28 @@ function humidData(){
     return hs;
 }
 
+/* TODO implement different line colors for different temperatures, see http://jsfiddle.net/canvasjs/tshg7tLg/
+function lineColor(elm){
+    if elem.y <= - function dataGenerator(limit) {
+        var y = 100;
+        var points = [];
+        var color;
+        for (var i = 0; i < limit; i += 1) {
+          y += (Math.random() * 100 - 50);
+          if (y > 50)
+            color = "red";
+          else
+            color = "blue";
+          points.push({
+            x: i - limit / 2,
+            y: y,
+            lineColor: color,
+            color:color
+          });
+        }
+        return points;
+      }
+}*/
 
 function TempGraph (){
 	
