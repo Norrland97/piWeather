@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin python3
 #important line for running in the background
 
 import os
