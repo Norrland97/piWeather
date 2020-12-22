@@ -30,7 +30,7 @@ while True:
             temp = data['weather_logs'] 
             # python object to be appended 
             y = {"Date" : time.strftime('%d %b %Y %H:%M:%S'),
-                 "Temp" : temperature,
+                 "Temp" : round(temperature,2),
                  "Humi" : humidity} 
         
             # appending data to emp_details  

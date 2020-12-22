@@ -24,9 +24,9 @@ function Contents(){
 function Head (){
     return(
         <div>
-            <h1 Style = "float: right; font-size:7em; padding-left: 0.1em; padding-right: 0.1em;" Class = "shadow-6"> <Clock /> </h1>
+            <h1 Style = "font-size:7em; margin-left:3em; padding-left: 0.1em; width: 2.65em;" Class = "shadow-6"> <Clock /> </h1>
             <h1> </h1>
-            <h2>Nuvarande temperatur: <CurrT /></h2> 
+            <h2 Style = "margin-top:-3em;">Nuvarande temperatur: <CurrT /></h2> 
             <h2 Style="padding-top:1em;">Nuvarande Luftfuktighet: <CurrH /></h2> 
         </div> 
     );
