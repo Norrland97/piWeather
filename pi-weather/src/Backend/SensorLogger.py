@@ -7,12 +7,12 @@ DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 4
 
 # function to add to JSON 
-def write_json(data, filename='/Logs/data.json'): 
+def write_json(data, filename='./Logs/data.json'): 
     with open(filename,'w') as f: 
         json.dump(data, f, indent=4) 
 
 try:
-    if os.stat('/Logs/data.json').st_size == 0:
+    if os.stat('./Logs/data.json').st_size == 0:
             data = { "weather_logs" : []}
             write_json(data)
 except:
@@ -25,7 +25,7 @@ while True:
     # when the temperature and humidity both has been read succesfully, append that data to the data.json file
     # src : https://www.geeksforgeeks.org/append-to-json-file-using-python/
     if humidity is not None and temperature is not None:
-        with open('data.json') as json_file: 
+        with open('./Logs/data.json') as json_file: 
             data = json.load(json_file) 
             temp = data['weather_logs'] 
             # python object to be appended 
@@ -39,4 +39,6 @@ while True:
     else:
         print("Failed to retrieve data from humidity sensor")
 
-    time.sleep(60) #seconds
+    time.sleep(60) #seconds 
+
+     
