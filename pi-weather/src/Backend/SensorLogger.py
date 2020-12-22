@@ -1,7 +1,11 @@
+#!/usr/bin/env python3
+#important line for running in the background
+
 import os
 import time
 import Adafruit_DHT
 import json
+
 
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 4
