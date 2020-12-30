@@ -105,8 +105,12 @@ function HumidGraph (){
 
 function humidData(){
     hs.length = 0;
+    var from = new Date();
+    from.setDate(from.getDate() -1);
     for (const elem of data.weather_logs){
-        hs.push({x: new Date(elem.Date), y: parseFloat(elem.Humi)})
+	if (new Date(elem.Date) >= from){
+		hs.push({x: new Date(elem.Date), y: parseFloat(elem.Humi)})
+	}
     } 
 }
 
@@ -163,8 +167,12 @@ function TempGraph (){
 /* add function of getting the list of temp and list of humidity from a Json object*/
 function tempData(){
     ts.length = 0;
+    var from = new Date();
+    from.setDate(from.getDate() - 1);
     for (const elem of data.weather_logs){
-        ts.push({x: new Date(elem.Date), y: parseFloat(elem.Temp)})
+	if (new Date(elem.Date) >= from){
+        	ts.push({x: new Date(elem.Date), y: parseFloat(elem.Temp)})
+	}
     } 
 }
 
