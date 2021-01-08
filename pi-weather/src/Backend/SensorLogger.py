@@ -32,7 +32,7 @@ while True:
         with open(filePath) as file:
             data = json.load(file)
             temp = data['weather_logs']
-            data.pop()
+            temp.pop(0)
         write_json(data)
 
     # when the temperature and humidity both has been read succesfully, append that data to the data.json file
