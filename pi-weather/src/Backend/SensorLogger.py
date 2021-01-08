@@ -6,7 +6,7 @@ import time
 import Adafruit_DHT
 import json
 
-filePath = './Backend/Logs/data.json'
+filePath = './src/Backend/Logs/data.json'
 
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 4
